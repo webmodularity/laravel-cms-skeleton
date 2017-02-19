@@ -19,3 +19,4 @@ composer create-project --prefer-dist --stability=dev --repository=https://toran
     ```
     * Modify the `config/adminlte.php` config file.
 3. Modify the `.env` file.
+
