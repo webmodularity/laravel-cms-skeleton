@@ -18,4 +18,4 @@ Use the composer create-project command:
     php artisan vendor:publish --provider="JeroenNoten\LaravelAdminLte\ServiceProvider" --tag=config
     ```
     * Modify the `config/adminlte.php` config file.
-3. 
+3. Modify the `.env` file.
