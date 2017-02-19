@@ -3,7 +3,7 @@
 ## Installation
 Use the composer create-project command:
 ```php
-
+composer create-project --prefer-dist --stability=dev --repository=https://toran.webmodularity.com/repo/private/ webmod/laravel-cms-skeleton cms
 ```
 
 ## Config
