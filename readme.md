@@ -7,12 +7,12 @@ composer create-project --prefer-dist --repository=https://toran.webmodularity.c
 ```
 
 Setup DB:
-  * Create a new schema (or use an existing) using utf8mb4 charset if possible
-  * Make any changes needed to DB permissions and add DB credentials to `.env`
-  * Run DB Migrations & Seeders:
-  ```php
-  php artisan migrate --seed
-  ```
+* Create a new schema (or use an existing) using utf8mb4 charset if possible
+* Make any changes needed to DB permissions and add DB credentials to `.env`
+* Run DB Migrations & Seeders:
+```php
+php artisan migrate --seed
+```
     
 ## Config
 1. Follow the Config setup guide for the [webmodularity/laravel-auth](https://github.com/webmodularity/laravel-auth) package (including social logins if needed)
