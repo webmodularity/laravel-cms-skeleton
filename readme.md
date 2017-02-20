@@ -1,18 +1,18 @@
 # laravel-cms-skeleton
 
 ## Installation
-1. Use the composer create-project command:
+Use the composer create-project command:
 ```php
 composer create-project --prefer-dist --repository=https://toran.webmodularity.com/repo/private/ webmod/laravel-cms-skeleton cms
 ```
 
-2. Setup DB:
-    * Create a new schema (or use an existing) using utf8mb4 charset if possible
-    * Make any changes needed to DB permissions and add DB credentials to `.env`
-    * Run DB Migrations & Seeders:
-    ```php
-    php artisan migrate --seed
-    ```
+Setup DB:
+  * Create a new schema (or use an existing) using utf8mb4 charset if possible
+  * Make any changes needed to DB permissions and add DB credentials to `.env`
+  * Run DB Migrations & Seeders:
+  ```php
+  php artisan migrate --seed
+  ```
     
 ## Config
 1. Follow the Config setup guide for the [webmodularity/laravel-auth](https://github.com/webmodularity/laravel-auth) package (including social logins if needed)
