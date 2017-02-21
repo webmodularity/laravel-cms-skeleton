@@ -14,72 +14,73 @@
             <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
         </div>
         <!-- /.login-logo -->
-        @if (session('social_login_error'))
-            <div class="callout callout-danger">
-                <h4>Social Login Error!</h4>
-                <p>{{ session('social_login_error') }}</p>
-            </div>
-        @endif
         <div class="login-box-body">
             <p class="login-box-msg">{{ trans('adminlte::adminlte.login_message') }}</p>
-            <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="post">
-                {!! csrf_field() !!}
+            @if(!config('wm.auth.social.social_login_only', false))
+                <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="post">
+                    {!! csrf_field() !!}
 
-                <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
-                    <input type="email" name="email" class="form-control" value="{{ old('email') }}"
-                           placeholder="{{ trans('adminlte::adminlte.email') }}">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
-                    <input type="password" name="password" class="form-control"
-                           placeholder="{{ trans('adminlte::adminlte.password') }}">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input type="checkbox" name="remember"> {{ trans('adminlte::adminlte.remember_me') }}
-                            </label>
+                    <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
+                        <input type="email" name="email" class="form-control" value="{{ old('email') }}"
+                               placeholder="{{ trans('adminlte::adminlte.email') }}">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
+                        <input type="password" name="password" class="form-control"
+                               placeholder="{{ trans('adminlte::adminlte.password') }}">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        @if ($errors->has('password'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox" name="remember"> {{ trans('adminlte::adminlte.remember_me') }}
+                                </label>
+                            </div>
                         </div>
+                        <!-- /.col -->
+                        <div class="col-xs-4">
+                            <button type="submit"
+                                    class="btn btn-primary btn-block btn-flat">{{ trans('adminlte::adminlte.sign_in') }}</button>
+                        </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
-                    <div class="col-xs-4">
-                        <button type="submit"
-                                class="btn btn-primary btn-block btn-flat">{{ trans('adminlte::adminlte.sign_in') }}</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            </form>
-
-            <div class="social-auth-links text-center">
-                <p>- OR -</p>
-                <a href="social/github" class="btn btn-block btn-social btn-github">
-                    <i class="fa fa-github"></i> Sign in with GitHub
-                </a>
-            </div>
-
-            <!-- <div class="auth-links">
-                <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}"
-                   class="text-center"
-                >{{ trans('adminlte::adminlte.i_forgot_my_password') }}</a>
-                <br>
-                @if (config('adminlte.register_url', 'register'))
-                    <a href="{{ url(config('adminlte.register_url', 'register')) }}"
+                </form>
+                <div class="auth-links">
+                    <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}"
                        class="text-center"
-                    >{{ trans('adminlte::adminlte.register_a_new_membership') }}</a>
-                @endif
-            </div> -->
+                    >{{ trans('adminlte::adminlte.i_forgot_my_password') }}</a>
+                    <br>
+                    @if (config('adminlte.register_url', 'register'))
+                        <a href="{{ url(config('adminlte.register_url', 'register')) }}"
+                           class="text-center"
+                        >{{ trans('adminlte::adminlte.register_a_new_membership') }}</a>
+                    @endif
+                </div>
+            @endif()
+        <!-- Social Logins -->
+            @if(count($socialProviders) > 0)
+                <div class="social-auth-links text-center">
+                    @if(!config('wm.auth.social.social_login_only', false))
+                        <p class="text-center">- OR -</p>
+                    @endif()
+                    @foreach($socialProviders as $socialProvider)
+                        <a href="social/{{ $socialProvider->provider->slug }}" class="btn btn-block btn-social btn-{{ $socialProvider->provider->slug }}">
+                            <i class="fa fa-{{ $socialProvider->provider->slug }}"></i> Sign in with {{ $socialProvider->provider->name }}
+                        </a>
+                    @endforeach
+                </div>
+            @endif()
         </div>
         <!-- /.login-box-body -->
     </div><!-- /.login-box -->
